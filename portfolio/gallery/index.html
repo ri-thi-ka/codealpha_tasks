@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Simple Image Gallery</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        body{
+            font-family: Arial;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        h1{
+            margin-top: 20px;
+        }
+
+        
+
+        button{
+            padding: 10px 15px;
+            margin: 10px;
+
+            border: none;
+
+            background-color: black;
+            color: white;
+
+            cursor: pointer;
+
+            border-radius: 5px;
+        }
+
+        button:hover{
+            background-color: gray;
+        }
+
+        
+
+        .gallery{
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 15px;
+        }
+
+        .gallery img{
+            width: 250px;
+            height: 180px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .gallery img:hover{
+            transform: scale(1.05);
+        }
+
+        
+
+        .lightbox{
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0,0,0,0.8);
+
+            text-align: center;
+        }
+
+        .lightbox img{
+            width: 70%;
+            margin-top: 50px;
+
+            border-radius: 10px;
+        }
+
+        
+
+        @media screen and (max-width: 600px){
+
+            .gallery img{
+                width: 90%;
+                height: auto;
+            }
+
+            .lightbox img{
+                width: 90%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>My Image Gallery</h1>
+
+    
+
+    <button onclick="showAll()">All</button>
+
+    <button onclick="showNature()">Nature</button>
+
+    <button onclick="showCars()">Cars</button>
+
+    
+
+    <div class="gallery">
+
+        <img src="https://picsum.photos/id/1015/400/300"
+             class="nature"
+             onclick="openImage(this.src)">
+
+        <img src="https://picsum.photos/id/1071/400/300"
+             class="cars"
+             onclick="openImage(this.src)">
+
+        <img src="https://picsum.photos/id/1025/400/300"
+             class="nature"
+             onclick="openImage(this.src)">
+
+        <img src="https://picsum.photos/id/1040/400/300"
+             class="cars"
+             onclick="openImage(this.src)">
+
+    </div>
+
+    
+
+    <div class="lightbox" id="lightbox">
+
+        <img id="bigImage">
+
+        <br><br>
+
+        <button onclick="closeImage()">Close</button>
+
+    </div>
+
+    <script>
+
+        
+
+        function openImage(image){
+
+            document.getElementById("lightbox").style.display = "block";
+
+            document.getElementById("bigImage").src = image;
+        }
+
+        
+
+        function closeImage(){
+
+            document.getElementById("lightbox").style.display = "none";
+        }
+
+        
+
+        function showAll(){
+
+            let images = document.querySelectorAll(".gallery img");
+
+            images.forEach(function(img){
+
+                img.style.display = "block";
+            });
+        }
+
+        
+
+        function showNature(){
+
+            let images = document.querySelectorAll(".gallery img");
+
+            images.forEach(function(img){
+
+                if(img.classList.contains("nature")){
+
+                    img.style.display = "block";
+                }
+
+                else{
+
+                    img.style.display = "none";
+                }
+            });
+        }
+
+        
+
+        function showCars(){
+
+            let images = document.querySelectorAll(".gallery img");
+
+            images.forEach(function(img){
+
+                if(img.classList.contains("cars")){
+
+                    img.style.display = "block";
+                }
+
+                else{
+
+                    img.style.display = "none";
+                }
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
