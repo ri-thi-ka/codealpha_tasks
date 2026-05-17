@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Calculator</title>
+
+    <style>
+       
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #dfe6e9;
+            font-family: Arial, Helvetica, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+        }
+
+       
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+
+            width: 300px;
+
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+       
+        #display {
+            width: 100%;
+            height: 60px;
+
+            border: none;
+            outline: none;
+
+            background-color: #f1f2f6;
+
+            font-size: 28px;
+            text-align: right;
+
+            padding-right: 10px;
+
+            border-radius: 8px;
+
+            margin-bottom: 15px;
+        }
+
+       
+        .buttons {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 10px;
+        }
+
+        button {
+            height: 55px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+       
+        button:hover {
+            transform: scale(1.05);
+        }
+
+       
+        .number {
+            background-color: #dfe4ea;
+        }
+
+       
+        .operator {
+            background-color: orange;
+            color: white;
+        }
+
+     
+        .equal {
+            background-color: green;
+            color: white;
+        }
+
+       
+        .clear {
+            background-color: red;
+            color: white;
+        }
+
+        
+        @media screen and (max-width: 400px) {
+
+            .calculator {
+                width: 90%;
+            }
+
+            button {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Calculator Container -->
+    <div class="calculator">
+
+        <!-- Display Screen -->
+        <input type="text" id="display" readonly>
+
+        <!-- Buttons -->
+        <div class="buttons">
+
+            <!-- First Row -->
+            <button class="clear" onclick="clearScreen()">C</button>
+            <button class="operator" onclick="addValue('/')">÷</button>
+            <button class="operator" onclick="addValue('*')">×</button>
+            <button class="operator" onclick="addValue('-')">-</button>
+
+            <!-- Second Row -->
+            <button class="number" onclick="addValue('7')">7</button>
+            <button class="number" onclick="addValue('8')">8</button>
+            <button class="number" onclick="addValue('9')">9</button>
+            <button class="operator" onclick="addValue('+')">+</button>
+
+            <!-- Third Row -->
+            <button class="number" onclick="addValue('4')">4</button>
+            <button class="number" onclick="addValue('5')">5</button>
+            <button class="number" onclick="addValue('6')">6</button>
+            <button class="equal" onclick="calculateAnswer()">=</button>
+
+            <!-- Fourth Row -->
+            <button class="number" onclick="addValue('1')">1</button>
+            <button class="number" onclick="addValue('2')">2</button>
+            <button class="number" onclick="addValue('3')">3</button>
+            <button class="number" onclick="addValue('.')">.</button>
+
+            <!-- Last Row -->
+            <button class="number" onclick="addValue('0')" style="grid-column: span 4;">
+                0
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        
+        let display = document.getElementById("display");
+
+        
+        function addValue(value) {
+            display.value = display.value + value;
+        }
+
+      
+        function clearScreen() {
+            display.value = "";
+        }
+
+        
+        function calculateAnswer() {
+
+            try {
+                display.value = eval(display.value);
+            }
+
+            catch {
+                display.value = "Error";
+            }
+        }
+
+    
+        document.addEventListener("keydown", function (event) {
+
+            let key = event.key;
+
+           
+            if (!isNaN(key) || key == "+" || key == "-" || key == "*" || key == "/" || key == ".") {
+
+                addValue(key);
+            }
+
+          
+            else if (key == "Enter") {
+
+                calculateAnswer();
+            }
+
+           
+            else if (key == "Backspace") {
+
+                display.value = display.value.slice(0, -1);
+            }
+
+           
+            else if (key == "c" || key == "C") {
+
+                clearScreen();
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
